@@ -1,0 +1,14 @@
+<table>
+	<tr>
+		<td><%= link_to 'Home', :action => 'show', :wiki_page => 'HomePage' %> | </td>
+		<td><%= link_to 'All Pages', :action => 'list' %> | </td>
+		<td><%= link_to 'Recently Revised', :action => 'recently_revised' %> | </td>
+		<td>
+			<% form_tag :action => 'search' do -%>
+				<%= text_field 'search', 'query', :value => 'Search',:size => 20,
+					:onfocus => "this.value == 'Search' ? this.value = '' : true",
+					:onblur => "this.value == '' ? this.value = 'Search' : true" %>
+			<% end -%>
+		</td>
+	</tr>
+</table>

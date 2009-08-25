@@ -1,0 +1,6 @@
+<div id="preview"><%= to_wiki(@wiki_revision.contents) %></div>
+<%= observe_field 'mini_wiki_revision_contents',  :frequency => 0.5, 
+         :update => 'preview', :url => { :action=> 'preview' }, 
+         :with => "'preview=' + escape(value)",
+         :loading => "document.getElementById('busy').style.display='inline'",
+         :loaded => "document.getElementById('busy').style.display='none'" %>

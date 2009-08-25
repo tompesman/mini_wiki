@@ -1,0 +1,20 @@
+<%= render :partial => '/tabs' %>
+
+<h1>Editing <%= @wiki_page.name %></h1>
+<div id="wiki_form_container">
+<div id="wiki_form">
+	
+<% if @wiki_revision != @wiki_page.mini_wiki_revisions.last -%>
+<span class="wiki_small">Editing current revision, not the last revision.</span>
+<% end -%>
+
+<% form_tag :action => 'update', :wiki_page => @wiki_page.name do %>
+  <%= render :partial => '/form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+<%= link_to 'Back', :action => 'show', :wiki_page => @wiki_page.name %>
+
+</div>
+
+<%= render :partial => '/preview' %>
+</div>

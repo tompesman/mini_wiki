@@ -1,0 +1,22 @@
+<%= error_messages_for 'wiki_page', 'wiki_revision' %>
+
+<% if controller.action_name == 'new' || controller.action_name == 'create' -%>
+	<p><label for="wiki_page_name">Name</label><br/>
+	<% if @wiki_page.name.empty? -%>
+		<%= text_field 'wiki_page', 'name' %>
+	<% else %>
+		<%= text_field 'wiki_page', 'name', :readonly=>'readonly' %>(readonly)
+	<% end -%>
+	</p>
+<% end -%>
+
+<p><label for="wiki_revision_author">Author</label><br/>
+<% if (@wiki_revision.author && @wiki_revision.author.empty?) || !@wiki_revision.author -%>
+	<%= text_field 'wiki_revision', 'author' %>
+<% else -%>
+	<%= text_field 'wiki_revision', 'author', :readonly=>'readonly' %>(readonly)
+<% end -%>
+</p>
+
+<p><label for="wiki_revision_contents">Contents</label> - <a href="http://redcloth.org/textile" target="_blank">Formatting</a><br/>
+<%= text_area 'wiki_revision', 'contents' %></p>

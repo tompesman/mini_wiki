@@ -1,0 +1,14 @@
+<%= render :partial => '/tabs' %>
+
+<h1>New page</h1>
+
+<div id="wiki_form_container">
+<div id="wiki_form">
+<% form_tag :action => 'create' do %>
+  <%= render :partial => '/form' %>
+  <%= submit_tag "Create" %>
+<% end %>
+</div>
+
+<%= render :partial => '/preview' %>
+</div>

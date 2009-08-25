@@ -1,0 +1,8 @@
+<%= render :partial => '/tabs' %>
+
+<h2>Recently Revised</h2>
+<% unless @wiki_pages.empty? -%>
+	<%= render :partial => '/wiki_pages', :locals => { :wiki_pages => @wiki_pages } %>
+<% else -%>
+	No pages found
+<% end -%>

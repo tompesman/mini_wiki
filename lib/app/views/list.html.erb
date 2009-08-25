@@ -1,0 +1,23 @@
+<%= render :partial => '/tabs' %>
+
+<h1>All Pages</h1>
+
+<ul>
+<% for wiki_page in @wiki_pages -%>
+	<% wiki_revision = wiki_page.mini_wiki_revisions.first %>
+    <li><%= link_to wiki_page.name, :action => 'show', :wiki_page => wiki_page.name %></li>
+	<span class="wiki_small">
+    <%=h wiki_revision.author %>,
+	Revision: <%= wiki_revision.revision %>
+    <% if @authorized -%>
+	<%= link_to 'edit', :action => 'edit', :wiki_page => wiki_page.name %>
+    <%= link_to 'destroy', { :action => 'destroy', :wiki_page => wiki_page.name }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end -%>
+	</span>
+<% end -%>
+</ul>
+
+<br/>
+<% if @authorized -%>
+<%= link_to 'New page', :action => 'new' %>
+<% end -%>

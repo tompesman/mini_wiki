@@ -1,0 +1,19 @@
+<%= render :partial => '/tabs' %>
+
+<h1><%=h @wiki_page.name %></h1>
+
+<%= to_wiki(@wiki_revision.contents) %><br/>
+
+<div class="wiki_footer">
+Edited on: <%= @wiki_revision.updated_at.to_formatted_s(:short) %> by <%=h @wiki_revision.author %><% if @authorized %>, <%= link_to 'edit', :action => 'edit', :wiki_page => @wiki_page.name %><% end %>
+<br/>
+
+Revision: 
+<%= link_to_if @wiki_revision.revision-1 > 0, '<', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision-1 %>
+<%= @wiki_revision.revision %>
+<%= link_to_if @wiki_page.mini_wiki_revisions.last.revision > @wiki_revision.revision, '>', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision+1 %>
+
+<% if @authorized && @wiki_revision != @wiki_page.mini_wiki_revision -%>
+<%= link_to 'current', { :action => 'setrevision', :wiki_page => @wiki_page.name, :setrevision => @wiki_revision.revision}, :confirm => 'Do you want to make this revision active?', :method => :post %></td>
+<% end -%>
+</div>

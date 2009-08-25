@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>WikiPages: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'wiki' %>
+</head>
+<body>
+
+<div id="wiki_container">
+	<table>
+		<tr>
+			<td><%= link_to 'Homepage', :action => 'show', :wiki_page => @wiki_config.default_page %> | </td>
+			<td><%= link_to 'All Pages', :action => 'list' %> | </td>
+			<td><%= link_to 'Recently Revised', :action => 'recently_revised' %> | </td>
+			<td>
+				<% form_tag :action => 'search' do -%>
+					<%= text_field 'search', 'query', :value => 'Search',:size => 20,
+						:onfocus => "this.value == 'Search' ? this.value = '' : true",
+						:onblur => "this.value == '' ? this.value = 'Search' : true" %>
+				<% end -%>
+			</td>
+		</tr>
+	</table>
+	<% if flash[:notice] %><p style="color: green"><%= flash[:notice] %></p><% end %>
+	<% if flash[:warning] %><p style="color: red"><%= flash[:warning] %></p><% end %>
+
+<%= yield  %>
+</div>
+</body>
+</html>

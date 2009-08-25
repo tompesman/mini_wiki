@@ -1,0 +1,15 @@
+<%= render :partial => '/tabs' %>
+
+<h2>Search by pagename</h2>
+<% unless @search_names.empty? -%>
+	<%= render :partial => '/wiki_pages', :locals => { :wiki_pages => @search_names } %>
+<% else -%>
+	Nothing found for: '<%= params[:search][:query]%>'
+<% end -%>
+
+<h2>Search by contents</h2>
+<% unless @search_contents.empty? -%>
+	<%= render :partial => '/wiki_pages', :locals => { :wiki_pages => @search_contents } %>
+<% else -%>
+	Nothing found for: '<%= params[:search][:query]%>'
+<% end -%>

@@ -1,0 +1,68 @@
+h1. MiniWiki
+
+Small plugin to integrate a wiki in your website.
+
+h2. Requirements
+* RedCloth (developed with 3.0.4/4.1.9)
+
+<pre><code>gem install RedCloth</code></pre>
+And add the following to your @config/environment.rb@
+<pre><code>config.gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.1.9'</code></pre>
+
+
+h2. Install
+
+# <pre><code>./script/plugin install git://github.com/tompesman/mini_wiki.git</code></pre>
+# <pre><code>./script/generate mini_wiki migration</code></pre>
+# <pre><code>rake db:migrate</code></pre>
+# <pre><code>./script/generate controller wiki</code></pre>
+# Make 'MiniWikiController' the super class
+# use layout/css from the vendor/plugins/mini_wiki/sample directory
+
+h2. TODO: Routing
+
+<pre><code>  # wiki/new
+  map.connect 'wiki/new', :controller => 'wiki', :action => 'new'
+  # wiki/create
+  map.connect 'wiki/create', :controller => 'wiki', :action => 'create'
+  # wiki/list
+  map.connect 'wiki/list', :controller => 'wiki', :action => 'list'
+  # wiki/search
+  map.connect 'wiki/search', :controller => 'wiki', :action => 'search'
+  # wiki/recently_revised
+  map.connect 'wiki/recently_revised', :controller => 'wiki', :action => 'recently_revised'
+  # wiki/PageName
+  map.connect 'wiki/:wiki_page', :controller => 'wiki', :action => 'show'
+  # wiki/PageName/revision/2
+  map.connect 'wiki/:wiki_page/revision/:revision', :controller => 'wiki', :action => 'show'
+  # wiki/PageName/setrevision/1
+  map.connect 'wiki/:wiki_page/setrevision/:setrevision', :controller => 'wiki', :action => 'setrevision'
+  # wiki/PageName/edit
+  map.connect 'wiki/:wiki_page/edit', :controller => 'wiki', :action => 'edit'
+  # wiki/PageName/update
+  map.connect 'wiki/:wiki_page/update', :controller => 'wiki', :action => 'update'</code></pre>
+
+h3. Optionally
+
+you can add the map.root
+<pre><code>map.root :controller => "wiki"</code></pre>
+
+
+h2. Add authentication and username
+
+It's possible to add some security to the wiki, you can override the @authorized?@ and the @username@ method.
+The @username@ method will be used as a author when a wiki page is edited. The @authorized?@ will be checked before editing the wiki.
+
+<pre><code>class WikitestController < MiniWikiController
+    
+  def authorized?
+    false
+  end
+
+  def username
+    'Username'
+  end
+end
+</code></pre>
+
+Copyright (c) 2009 Tom Pesman, released under the MIT license

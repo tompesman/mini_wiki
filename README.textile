@@ -12,35 +12,11 @@ And add the following to your @config/environment.rb@
 
 h2. Install
 
-# <pre><code>./script/plugin install git://github.com/tompesman/mini_wiki.git</code></pre>
-# <pre><code>./script/generate mini_wiki migration</code></pre>
-# <pre><code>rake db:migrate</code></pre>
-# <pre><code>./script/generate controller wiki</code></pre>
-# Make 'MiniWikiController' the super class
-# use layout/css from the vendor/plugins/mini_wiki/sample directory
-
-h2. TODO: Routing
-
-<pre><code>  # wiki/new
-  map.connect 'wiki/new', :controller => 'wiki', :action => 'new'
-  # wiki/create
-  map.connect 'wiki/create', :controller => 'wiki', :action => 'create'
-  # wiki/list
-  map.connect 'wiki/list', :controller => 'wiki', :action => 'list'
-  # wiki/search
-  map.connect 'wiki/search', :controller => 'wiki', :action => 'search'
-  # wiki/recently_revised
-  map.connect 'wiki/recently_revised', :controller => 'wiki', :action => 'recently_revised'
-  # wiki/PageName
-  map.connect 'wiki/:wiki_page', :controller => 'wiki', :action => 'show'
-  # wiki/PageName/revision/2
-  map.connect 'wiki/:wiki_page/revision/:revision', :controller => 'wiki', :action => 'show'
-  # wiki/PageName/setrevision/1
-  map.connect 'wiki/:wiki_page/setrevision/:setrevision', :controller => 'wiki', :action => 'setrevision'
-  # wiki/PageName/edit
-  map.connect 'wiki/:wiki_page/edit', :controller => 'wiki', :action => 'edit'
-  # wiki/PageName/update
-  map.connect 'wiki/:wiki_page/update', :controller => 'wiki', :action => 'update'</code></pre>
+# @./script/plugin install git://github.com/tompesman/mini_wiki.git@
+# @./script/generate mini_wiki migration@
+# @rake db:migrate@
+# @./script/generate controller wiki@
+# Add @map.mini_wiki@ to your @config.routes.rb@
 
 h3. Optionally
 

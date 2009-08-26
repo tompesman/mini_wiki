@@ -1,0 +1,5 @@
+# Example config file
+# Location: config/mini_wiki.yml
+mini_wiki: 
+  layout: main
+  views_path: /../views/

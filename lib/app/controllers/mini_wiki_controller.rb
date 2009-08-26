@@ -1,11 +1,12 @@
 class MiniWikiController < ActionController::Base
+  layout MINI_WIKI_CONFIG['layout'], :except => :preview
+  append_view_path(File.dirname(__FILE__) + MINI_WIKI_CONFIG['views_path'])
 
   before_filter :authorized?, :username
 
-  append_view_path(File.dirname(__FILE__) + "/../views/")
-
    # load the default page
   def index
+    puts 
     if MiniWikiPage.first(:conditions => ["name = ?", "HomePage"]) == nil
       redirect_to :action => 'new', :name => "HomePage"
     else

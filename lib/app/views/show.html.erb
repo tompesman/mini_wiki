@@ -9,9 +9,9 @@ Edited on: <%= @wiki_revision.updated_at.to_formatted_s(:short) %> by <%=h @wiki
 <br/>
 
 Revision: 
-<%= link_to_if @wiki_revision.revision-1 > 0, '<', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision-1 %>
+<%= link_to_if @wiki_revision.revision-1 > 0, '&lt;', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision-1 %>
 <%= @wiki_revision.revision %>
-<%= link_to_if @wiki_page.mini_wiki_revisions.last.revision > @wiki_revision.revision, '>', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision+1 %>
+<%= link_to_if @wiki_page.mini_wiki_revisions.last.revision > @wiki_revision.revision, '&gt;', :action => 'show', :wiki_page => @wiki_page.name, :revision => @wiki_revision.revision+1 %>
 
 <% if @authorized && @wiki_revision != @wiki_page.mini_wiki_revision -%>
 <%= link_to 'current', { :action => 'setrevision', :wiki_page => @wiki_page.name, :setrevision => @wiki_revision.revision}, :confirm => 'Do you want to make this revision active?', :method => :post %></td>

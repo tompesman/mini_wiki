@@ -1,6 +1,6 @@
 <ul>
 <% for wiki in wiki_pages -%>
-	<li><%= link_to wiki.name, :action => 'show', :wiki_page => wiki.name %></li>
-	<span class="wiki_small"><%= wiki.updated_at.to_formatted_s(:short) %></span>
+	<li><%= link_to wiki.name, :action => 'show', :wiki_page => wiki.name %><br/>
+	<span class="wiki_small"><%= wiki.updated_at.to_formatted_s(:short) %></span></li>
 <% end -%>
 </ul>

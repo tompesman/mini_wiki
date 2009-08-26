@@ -44,7 +44,7 @@ class MiniWikiController < ActionController::Base
 
   def search
     @search_names = MiniWikiPage.all(:conditions => ["name LIKE ? ",'%'+params[:search][:query]+'%'])
-    @search_contents = MiniWikiPage.all(:conditions => ["test_revisions.`contents` LIKE ?", '%'+params[:search][:query]+'%'],
+    @search_contents = MiniWikiPage.all(:conditions => ["mini_wiki_revisions.`contents` LIKE ?", '%'+params[:search][:query]+'%'],
                                         :include => [:mini_wiki_revisions])
     
     render :template => 'search'

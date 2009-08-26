@@ -5,7 +5,7 @@
 <ul>
 <% for wiki_page in @wiki_pages -%>
 	<% wiki_revision = wiki_page.mini_wiki_revisions.first %>
-    <li><%= link_to wiki_page.name, :action => 'show', :wiki_page => wiki_page.name %></li>
+    <li><%= link_to wiki_page.name, :action => 'show', :wiki_page => wiki_page.name %><br/>
 	<span class="wiki_small">
     <%=h wiki_revision.author %>,
 	Revision: <%= wiki_revision.revision %>
@@ -14,6 +14,7 @@
     <%= link_to 'destroy', { :action => 'destroy', :wiki_page => wiki_page.name }, :confirm => 'Are you sure?', :method => :post %></td>
     <% end -%>
 	</span>
+	</li>
 <% end -%>
 </ul>
 

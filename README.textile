@@ -3,11 +3,10 @@ h1. MiniWiki
 Small plugin to integrate a wiki in your website.
 
 h2. Requirements
-* RedCloth (developed with 3.0.4/4.1.9)
-
-<pre><code>gem install RedCloth</code></pre>
+* RedCloth (developed with 3.0.4/4.1.9/4.2.2)
+@gem install RedCloth@
 And add the following to your @config/environment.rb@
-<pre><code>config.gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.1.9'</code></pre>
+@config.gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.2.2'@
 
 
 h2. Install
@@ -21,10 +20,10 @@ h2. Install
 h3. Optionally
 
 you can add the map.root
-<pre><code>map.root :controller => "wiki"</code></pre>
+@map.root :controller => "wiki"@
 
 
-h2. Add authentication and username
+h2. TODO: Add authentication and username
 
 It's possible to add some security to the wiki, you can override the @authorized?@ and the @username@ method.
 The @username@ method will be used as a author when a wiki page is edited. The @authorized?@ will be checked before editing the wiki.

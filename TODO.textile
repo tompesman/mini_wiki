@@ -1,0 +1,11 @@
+h1. TODO
+
+* simplify installation
+** make migration
+** make route
+** copy layout
+** copy css
+** copy settings
+* update documentation
+* make more tests
+* fix username and authentication

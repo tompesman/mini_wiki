@@ -1,16 +1,16 @@
 class AddMiniWiki < ActiveRecord::Migration
   def self.up
-    create_table "mini_wiki_pages", :force => true do |t|
-      t.column "name",       :string,   :default => "", :null => false
-      t.references :mini_wiki_revision
+    create_table :mini_wiki_pages, :force => true do |t|
+      t.string      :name, :default => "", :null => false
+      t.references  :mini_wiki_revision
       t.timestamps
     end
   
-    create_table "mini_wiki_revisions", :force => true do |t|
-      t.column "author",       :string
-      t.column "revision",     :integer,  :default => 1,  :null => false
-      t.column "contents",     :text,     :default => "", :null => false
-      t.references :mini_wiki_page
+    create_table :mini_wiki_revisions, :force => true do |t|
+      t.string      :author
+      t.text        :contents,    :default => "", :null => false
+      t.integer     :revision, :default => 1,  :null => false
+      t.references  :mini_wiki_page
       t.timestamps
     end
     

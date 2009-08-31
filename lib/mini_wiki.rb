@@ -5,6 +5,7 @@ MINI_WIKI_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/mini_wiki.yml")['mini_wi
 
 # Required modules
 require 'redcloth'
+require 'mini_wiki/commands'
 require 'mini_wiki/routing'
 
 # Load the models/controller/helpers

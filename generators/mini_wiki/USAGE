@@ -5,8 +5,9 @@ Example:
     ./script/generate mini_wiki
 
     This will create:
-        The required mini_wiki migration
-        A sample configuration file
-        A sample css file
-        A sample layout
-        A sample username/authentication override module
+        Generates the required mini_wiki migration
+        Adds sample configuration file
+        Adds sample css file
+        Adds sample layout
+        Adds a sample username/authentication override module
+        Adds the route to routes.rb

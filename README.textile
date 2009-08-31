@@ -3,6 +3,7 @@ h1. MiniWiki
 Small plugin to integrate a wiki in your website.
 
 h2. Requirements
+* Rails > 2.3
 * RedCloth (developed with 3.0.4/4.1.9/4.2.2)
 @gem install RedCloth@
 And add the following to your @config/environment.rb@
@@ -14,7 +15,6 @@ h2. Install
 # @./script/plugin install git://github.com/tompesman/mini_wiki.git@
 # @./script/generate mini_wiki@
 # @rake db:migrate@
-# Add @map.mini_wiki@ to your @config/routes.rb@
 
 h3. Optional
 

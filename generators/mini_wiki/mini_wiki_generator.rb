@@ -15,6 +15,9 @@ class MiniWikiGenerator < Rails::Generator::Base
       
       # lib
       m.file 'lib/mini_wiki_override.rb', 'lib/mini_wiki_override.rb'
+      
+      # add route
+      m.mini_wiki_route
     end
   end
 end

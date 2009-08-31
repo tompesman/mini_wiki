@@ -1,5 +1,5 @@
 Description:
-    Explain the generator
+    Generates all files to get quickly started with MiniWiki
 
 Example:
     ./script/generate mini_wiki
@@ -9,3 +9,4 @@ Example:
         A sample configuration file
         A sample css file
         A sample layout
+        A sample username/authentication override module

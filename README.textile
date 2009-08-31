@@ -12,31 +12,22 @@ And add the following to your @config/environment.rb@
 h2. Install
 
 # @./script/plugin install git://github.com/tompesman/mini_wiki.git@
-# @./script/generate mini_wiki migration@
+# @./script/generate mini_wiki@
 # @rake db:migrate@
 # Add @map.mini_wiki@ to your @config/routes.rb@
 
 h3. Optional
 
 you can add the map.root
-@map.root :controller => "wiki"@
+@map.root :controller => "mini_wiki"@
 
 
-h2. TODO: Add authentication and username
+h2. Add authentication and username
 
-It's possible to add some security to the wiki, you can override the @authorized?@ and the @username@ method.
-The @username@ method will be used as a author when a wiki page is edited. The @authorized?@ will be checked before editing the wiki.
-
-<pre><code>class WikitestController < MiniWikiController
-    
-  def authorized?
-    false
-  end
-
-  def username
-    'Username'
-  end
-end
-</code></pre>
+It's possible to add some security to the wiki. Edit the @mini_wiki_override.rb@
+in the lib directory. The @mini_wiki_authorized@ method should return a boolean
+and the @mini_wiki_username@ should return a string. Finaly add to the
+@app/controllers/application_controller.rb@ file @include MiniWikiOverride@ to
+activate the @mini_wiki_override.rb@ module.
 
 Copyright (c) 2009 Tom Pesman, released under the MIT license

@@ -12,6 +12,9 @@ class MiniWikiGenerator < Rails::Generator::Base
 
       # config
       m.file 'config/mini_wiki.yml', 'config/mini_wiki.yml'
+      
+      # lib
+      m.file 'lib/mini_wiki_override.rb', 'lib/mini_wiki_override.rb'
     end
   end
 end

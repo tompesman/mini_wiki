@@ -1,4 +1,4 @@
-class MiniWikiController < ActionController::Base
+class MiniWikiController < ApplicationController
   layout MINI_WIKI_CONFIG['layout'], :except => :preview
   append_view_path(File.dirname(__FILE__) + MINI_WIKI_CONFIG['views_path'])
 
@@ -76,7 +76,7 @@ class MiniWikiController < ActionController::Base
     MiniWikiPage.transaction do
       @wiki_page = MiniWikiPage.new(params[:wiki_page])
       @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
-      @wiki_revision.author = username
+      @wiki_revision.author = @username
       saved = @wiki_page.save
       
       @wiki_page.mini_wiki_revisions << @wiki_revision 
@@ -98,6 +98,7 @@ class MiniWikiController < ActionController::Base
   def edit
     @wiki_page = MiniWikiPage.find_by_name(params[:wiki_page])
     @wiki_revision = @wiki_page.mini_wiki_revision
+    @wiki_revision.author = @username
     render :template => 'edit'
   end
 
@@ -110,7 +111,7 @@ class MiniWikiController < ActionController::Base
       @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
       @wiki_revision.revision = @wiki_page.mini_wiki_revisions.last.revision + 1
       if username
-        @wiki_revision.author = username
+        @wiki_revision.author = @username
       end
       @wiki_page.mini_wiki_revisions << @wiki_revision
       @wiki_page.mini_wiki_revision = @wiki_revision
@@ -152,12 +153,21 @@ class MiniWikiController < ActionController::Base
     redirect_to :action => 'list'
   end
   
-  # empty authorization method, override in controller
+  # authorization method, override in controller
   def authorized?
-    @authorized = true
+    if self.respond_to?("mini_wiki_authorized")
+      @authorized = mini_wiki_authorized
+    else
+      @authorized = true;
+    end
   end
-  # empty username method, override in controller
+  
+  # username method, override in controller
   def username
-    @username = ""
+    if self.respond_to?("mini_wiki_username")
+      @username = mini_wiki_username
+    else
+      @username = ""
+    end
   end
 end

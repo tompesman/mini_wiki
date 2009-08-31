@@ -2,7 +2,10 @@ Description:
     Explain the generator
 
 Example:
-    ./script/generate mini_wiki migration
+    ./script/generate mini_wiki
 
     This will create:
-        the required mini_wiki migration  
+        The required mini_wiki migration
+        A sample configuration file
+        A sample css file
+        A sample layout

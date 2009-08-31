@@ -14,10 +14,9 @@ h2. Install
 # @./script/plugin install git://github.com/tompesman/mini_wiki.git@
 # @./script/generate mini_wiki migration@
 # @rake db:migrate@
-# @./script/generate controller wiki@
-# Add @map.mini_wiki@ to your @config.routes.rb@
+# Add @map.mini_wiki@ to your @config/routes.rb@
 
-h3. Optionally
+h3. Optional
 
 you can add the map.root
 @map.root :controller => "wiki"@

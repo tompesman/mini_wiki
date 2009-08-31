@@ -1,7 +1,9 @@
 # MiniWiki
 
 # Load config
-MINI_WIKI_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/mini_wiki.yml")['mini_wiki']
+if File.exist?("#{RAILS_ROOT}/config/mini_wiki.yml")
+  MINI_WIKI_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/mini_wiki.yml")['mini_wiki']
+end
 
 # Required modules
 require 'redcloth'

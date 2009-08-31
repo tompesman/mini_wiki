@@ -5,7 +5,7 @@ class MiniWikiGenerator < Rails::Generator::Base
       m.migration_template 'add_mini_wiki.rb', 'db/migrate', { :migration_file_name => 'add_mini_wiki' }  
       
       # layout
-      m.file 'layouts/mini_wiki.html.erb', 'app/views/mini_wiki.css'
+      m.file 'layouts/mini_wiki.html.erb', 'app/views/layouts/mini_wiki.html.erb'
 
       # css
       m.file 'css/mini_wiki.css', 'public/stylesheets/mini_wiki.css'

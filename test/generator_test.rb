@@ -3,7 +3,7 @@ require 'rails_generator'
 require 'rails_generator/scripts/generate' 
 require 'rails_generator/scripts/destroy' 
 
-class RouteGeneratorTest < Test::Unit::TestCase 
+class GeneratorTest < Test::Unit::TestCase 
   def setup 
     FileUtils.mkdir_p(File.join(fake_rails_root, "config"))  
   end
@@ -21,7 +21,7 @@ class RouteGeneratorTest < Test::Unit::TestCase
     END
     File.open(routes_path, 'wb') {|f| f.write(content) } 
     
-    Rails::Generator::Scripts::Generate.new.run(["mini_wiki_route"], :destination => fake_rails_root)  
+    Rails::Generator::Scripts::Generate.new.run(["mini_wiki"], :destination => fake_rails_root)  
     assert_match /map\.mini_wiki/, File.read(routes_path)  
   end  
   
@@ -35,7 +35,7 @@ class RouteGeneratorTest < Test::Unit::TestCase
     END
     File.open(routes_path, 'wb') {|f| f.write(content) }
     
-    Rails::Generator::Scripts::Destroy.new.run(["mini_wiki_route"], :destination => fake_rails_root)  
+    Rails::Generator::Scripts::Destroy.new.run(["mini_wiki"], :destination => fake_rails_root)  
     assert_no_match /map\.mini_wiki/, File.read(routes_path)  
   end  
   

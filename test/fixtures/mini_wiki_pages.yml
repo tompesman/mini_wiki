@@ -1,0 +1,9 @@
+HomePage:
+    id: 1
+    name: HomePage
+    mini_wiki_revision_id: 3
+
+TestPage:
+    id: 2
+    name: TestPage
+    mini_wiki_revision_id: 5

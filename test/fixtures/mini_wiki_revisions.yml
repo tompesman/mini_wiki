@@ -1,0 +1,34 @@
+HomePage1:
+    id: 1
+    author: Tom Pesman
+    contents: long story
+    revision: 1
+    mini_wiki_page_id: 1
+    
+HomePage2:
+    id: 2
+    author: Tom Pesman
+    contents: very long story
+    revision: 2
+    mini_wiki_page_id: 1
+
+HomePage3:
+    id: 3
+    author: Tom Pesman
+    contents: very very long story
+    revision: 3
+    mini_wiki_page_id: 1
+
+TestPage1:
+    id: 4
+    author: Tester
+    contents: boring stuff
+    revision: 1
+    mini_wiki_page_id: 2
+
+TestPage2:
+    id: 5
+    author: Tester
+    contents: more stuff
+    revision: 2
+    mini_wiki_page_id: 2

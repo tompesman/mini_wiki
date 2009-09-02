@@ -11,7 +11,7 @@
 	Revision: <%= wiki_revision.revision %>
     <% if @authorized -%>
 	<%= link_to 'edit', :action => 'edit', :wiki_page => wiki_page.name %>
-    <%= link_to 'destroy', { :action => 'destroy', :wiki_page => wiki_page.name }, :confirm => 'Are you sure?', :method => :post %></td>
+    <%= link_to 'destroy', { :action => 'destroy', :wiki_page => wiki_page.name }, :confirm => 'Are you sure?', :method => :post %>
     <% end -%>
 	</span>
 	</li>

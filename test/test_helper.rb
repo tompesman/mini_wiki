@@ -1,17 +1,8 @@
-#require 'rubygems'
-#require 'active_support'
-#require 'active_support/test_case'
-
-#ENV['RAILS_ENV'] = 'test' 
-#ENV['RAILS_ROOT'] ||= File.dirname(__FILE__) + '/../../../..'
-#require 'test/unit'
-#require File.expand_path(File.join(ENV['RAILS_ROOT'], 'config/environment.rb'))
-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
 require 'test_help'
 
-class ActiveSupport::TestCase #Test::Unit::TestCase
+class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
   # test database remains unchanged so your fixtures don't have to be reloaded
@@ -42,6 +33,9 @@ class ActiveSupport::TestCase #Test::Unit::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   fixtures :all
+  
+  self.fixture_path = File.dirname(__FILE__) + "/fixtures/"
+  #$LOAD_PATH.unshift(ActiveSupport::TestCase.fixture_path)
 
   # Add more helper methods to be used by all tests here...
 end
@@ -73,3 +67,4 @@ def load_schema
   load(File.dirname(__FILE__) + "/schema.rb")
   require File.dirname(__FILE__) + '/../rails/init.rb'
 end
+load_schema

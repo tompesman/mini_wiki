@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20090825094321) do
     t.string   "author"
     t.integer  "revision",              :default => 1,  :null => false
     t.text     "contents",              :default => "", :null => false
-    t.integer  "mini_wiki_revision_id"
+    t.integer  "mini_wiki_page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

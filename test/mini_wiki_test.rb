@@ -1,7 +1,6 @@
 require 'test_helper'
 
-class MiniWikiTest < Test::Unit::TestCase  #ActiveSupport::TestCase
-  load_schema
+class MiniWikiTest < ActiveSupport::TestCase
   
   class MiniWikiPage < ActiveRecord::Base
   end
@@ -10,12 +9,7 @@ class MiniWikiTest < Test::Unit::TestCase  #ActiveSupport::TestCase
   end
 
   def test_schema_has_loaded_correctly
-    assert_equal [], MiniWikiPage.all
-    assert_equal [], MiniWikiRevision.all
+    assert_equal 2, MiniWikiPage.count
+    assert_equal 5, MiniWikiRevision.count
   end 
-  
-  # Replace this with your real tests.
-  #test "the truth" do
-  #  assert true
-  #end
 end

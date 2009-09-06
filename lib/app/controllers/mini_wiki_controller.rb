@@ -63,7 +63,7 @@ class MiniWikiController < ApplicationController
     end
     
     @wiki_revision = MiniWikiRevision.new
-    if username
+    unless @username.blank?
       @wiki_revision.author = @username
     end
     
@@ -110,7 +110,7 @@ class MiniWikiController < ApplicationController
       @wiki_page = MiniWikiPage.find_by_name(params[:wiki_page])
       @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
       @wiki_revision.revision = @wiki_page.mini_wiki_revisions.last.revision + 1
-      if username
+      unless @username.blank?
         @wiki_revision.author = @username
       end
       @wiki_page.mini_wiki_revisions << @wiki_revision

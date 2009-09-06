@@ -2,3 +2,4 @@ h1. TODO
 
 * update documentation
 * make more tests
+* idea: use to_param for model

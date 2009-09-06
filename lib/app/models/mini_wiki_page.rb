@@ -4,5 +4,5 @@ class MiniWikiPage < ActiveRecord::Base
   
   validates_presence_of :name
   validates_uniqueness_of :name  
-  validates_exclusion_of :name, :in => %w( new create list search recently_revised ), :message => "Reserved name for route"
+  validates_exclusion_of :name, :in => %w( new create list search recently_revised preview ), :message => "Reserved name for route"
 end 

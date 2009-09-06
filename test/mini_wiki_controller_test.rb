@@ -63,14 +63,29 @@ class MiniWikiControllerTest < ActionController::TestCase
   end
 
   test "should create a wiki in the database" do
-    get :create
     assert_difference('MiniWikiPage.count') do
-      post :create, :wiki_page => { :name => "NewPage" }, 
-                    :wiki_revision => { :author => "Test user", :contents => "text"}
+      assert_difference('MiniWikiRevision.count') do
+        post :create, :wiki_page => { :name => "NewPage" }, 
+                      :wiki_revision => { :author => "Test user", :contents => "text"}
+      end
     end
+    assert_equal MiniWikiPage.find_by_name("NewPage").mini_wiki_revision.contents, "text"
 
     assert_response :redirect
     assert_redirected_to :controller => "mini_wiki", :action => "show", :wiki_page => "NewPage"
+    assert !flash.empty?
+  end
+
+  test "should not create a wiki in the database" do
+    assert_no_difference('MiniWikiPage.count') do
+      assert_no_difference('MiniWikiRevision.count') do
+        post :create, :wiki_page => { :name => "NewPage" }, 
+                      :wiki_revision => { :author => "Test user", :contents => ""}
+      end
+    end
+
+    assert_response :success
+    assert_template :new
   end
   
   test "should show the edit page" do
@@ -81,7 +96,7 @@ class MiniWikiControllerTest < ActionController::TestCase
   
   test "should update a wiki in the database" do
     assert_difference('MiniWikiRevision.count', +1) do
-      assert_difference('MiniWikiPage.find_by_name("HomePage").mini_wiki_revisions.last.revision', +1) do
+      assert_difference('MiniWikiPage.find_by_name("HomePage").mini_wiki_revision.revision', +1) do
         put :update, :wiki_page => mini_wiki_pages(:HomePage).name, 
                      :wiki_revision => { :author => "Other user", :contents => "text added" }
       end
@@ -90,6 +105,19 @@ class MiniWikiControllerTest < ActionController::TestCase
     
     assert_response :redirect
     assert_redirected_to :controller => "mini_wiki", :action => "show", :wiki_page => "HomePage"
+  end
+  
+  test "should not update a wiki in the database" do
+    assert_no_difference('MiniWikiRevision.count') do
+      assert_no_difference('MiniWikiPage.count') do
+        put :update, :wiki_page => mini_wiki_pages(:HomePage).name, 
+                     :wiki_revision => { :author => "Other user", :contents => "" }
+      end
+    end
+    assert_equal MiniWikiPage.find_by_name("HomePage").mini_wiki_revision.contents, "very very long story"
+    
+    assert_response :success
+    assert_template :edit
   end
   
   test "should render a preview template" do

@@ -72,24 +72,24 @@ class MiniWikiController < ApplicationController
 
   # adds a new wikipage to database
   def create
-    saved = false
-    MiniWikiPage.transaction do
-      @wiki_page = MiniWikiPage.new(params[:wiki_page])
-      @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
-      @wiki_revision.author = @username
-      saved = @wiki_page.save
-      
-      @wiki_page.mini_wiki_revisions << @wiki_revision 
-      saved = @wiki_revision.save
-      
-      @wiki_page.mini_wiki_revision = @wiki_revision
-      saved = @wiki_page.save
-    end
-    
-    if saved
+    begin
+      MiniWikiPage.transaction do
+        @wiki_page = MiniWikiPage.new(params[:wiki_page])
+        @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
+        
+        unless @username.blank?
+          @wiki_revision.author = @username
+        end
+  
+        @wiki_page.save!
+        
+        @wiki_page.mini_wiki_revisions << @wiki_revision 
+        @wiki_page.mini_wiki_revision = @wiki_revision
+        @wiki_page.save!
+      end
       flash[:notice] = 'Page was successfully created.'
       redirect_to :action => 'show', :wiki_page => @wiki_page.name
-    else
+    rescue
       render :action => 'new', :template => 'new'
     end
   end
@@ -98,37 +98,37 @@ class MiniWikiController < ApplicationController
   def edit
     @wiki_page = MiniWikiPage.find_by_name(params[:wiki_page])
     @wiki_revision = @wiki_page.mini_wiki_revision
-    @wiki_revision.author = @username
+    unless @username.blank?
+      @wiki_revision.author = @username
+    end
     render :template => 'edit'
   end
 
   # saves a new revision to database
   def update
-
-    saved = false
-    MiniWikiPage.transaction do
-      @wiki_page = MiniWikiPage.find_by_name(params[:wiki_page])
-      @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
-      @wiki_revision.revision = @wiki_page.mini_wiki_revisions.last.revision + 1
-      unless @username.blank?
-        @wiki_revision.author = @username
+    begin
+      MiniWikiPage.transaction do
+        @wiki_page = MiniWikiPage.find_by_name(params[:wiki_page])
+        @wiki_revision = MiniWikiRevision.new(params[:wiki_revision])
+        @wiki_revision.revision = @wiki_page.mini_wiki_revisions.last.revision + 1
+        unless @username.blank?
+          @wiki_revision.author = @username
+        end
+        
+        @wiki_page.mini_wiki_revisions << @wiki_revision
+        @wiki_page.mini_wiki_revision = @wiki_revision
+        @wiki_page.save!
       end
-      @wiki_page.mini_wiki_revisions << @wiki_revision
-      @wiki_page.mini_wiki_revision = @wiki_revision
-      saved = @wiki_page.save
-    end
-    
-    if saved    
       flash[:notice] = 'Page was successfully updated.'
       redirect_to :action => 'show', :wiki_page => @wiki_page.name
-    else
+    rescue
       render :action => 'edit', :template => 'edit'
     end
   end
 
   # Returns the preview page
   def preview
-    render :template => "/preview", :layout => false
+    render :template => "preview", :layout => false
   end
   
   # Sets a nother revision as active.

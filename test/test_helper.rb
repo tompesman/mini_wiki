@@ -19,7 +19,7 @@ class ActiveSupport::TestCase
   # The only drawback to using transactional fixtures is when you actually 
   # need to test transactions.  Since your test is bracketed by a transaction,
   # any transactions started in your code will be automatically rolled back.
-  self.use_transactional_fixtures = true
+  self.use_transactional_fixtures = false
 
   # Instantiated fixtures are slow, but give you @david where otherwise you
   # would need people(:david).  If you don't want to migrate your existing
@@ -46,7 +46,7 @@ def load_schema
   db_adapter = ENV['DB']
   
   # no db passed, try one of these fine config-free DBs before bombing.  
-  db_adapter ||= 
+  db_adapter ||=
     begin 
       require 'rubygems'  
       require 'sqlite'

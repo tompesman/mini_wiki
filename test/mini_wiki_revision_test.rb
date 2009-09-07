@@ -1,4 +1,4 @@
-require 'test_helper.rb'
+require File.dirname(__FILE__) + '/test_helper.rb'
 
 class MiniWikiRevisionTest < ActiveSupport::TestCase
   # TODO: test models

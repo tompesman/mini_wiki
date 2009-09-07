@@ -1,4 +1,4 @@
-require 'test_helper.rb'
+require File.dirname(__FILE__) + '/test_helper.rb'
 require 'rails_generator'
 require 'rails_generator/scripts/generate'
 require 'rails_generator/scripts/destroy'

@@ -21,3 +21,18 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+begin
+  require 'rcov/rcovtask'
+  desc 'Output test coverage of plugin.'
+  Rcov::RcovTask.new(:coverage) do |t|
+    t.libs << "lib,test"
+    t.test_files = FileList["#{File.dirname(__FILE__)}/test/*.rb"]
+#    t.pattern    = 'test/**/*_test.rb'
+    t.output_dir = "#{File.dirname(__FILE__)}/test/coverage"
+    t.verbose = true
+    t.rcov_opts << '--rails --include "lib/*" --exclude "gem/*"'
+  end
+rescue
+  # no rcov installed
+end

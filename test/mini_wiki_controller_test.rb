@@ -35,6 +35,14 @@ class MiniWikiControllerTest < ActionController::TestCase
     assert_response :success
     assert_template :show
   end
+  
+  test "should show an exsisting page with non current revision" do
+    get :show, :wiki_page => mini_wiki_pages(:HomePage).name, :revision => 2
+    assert_not_nil assigns(:wiki_page)
+    assert_not_nil assigns(:wiki_revision)
+    assert_response :success
+    assert_template :show
+  end
 
   test "should redirect a non exsisting page" do
     get :show, :wiki_page => "Not a exsisting page"
@@ -58,6 +66,16 @@ class MiniWikiControllerTest < ActionController::TestCase
   
   test "should show the new page" do
     get :new
+    assert_not_nil assigns(:wiki_page)
+    assert_not_nil assigns(:wiki_revision)
+    assert_response :success
+    assert_template :new
+  end
+  
+  test "should show the new page with name" do
+    get :new, :name => 'NewPage'
+    assert_not_nil assigns(:wiki_page)
+    assert_not_nil assigns(:wiki_revision)
     assert_response :success
     assert_template :new
   end
@@ -90,6 +108,8 @@ class MiniWikiControllerTest < ActionController::TestCase
   
   test "should show the edit page" do
     get :edit, :wiki_page => mini_wiki_pages(:HomePage).name
+    assert_not_nil assigns(:wiki_page)
+    assert_not_nil assigns(:wiki_revision)
     assert_response :success
     assert_template :edit
   end
@@ -125,10 +145,28 @@ class MiniWikiControllerTest < ActionController::TestCase
     assert_template :preview
   end
   
-#  test "setrevision <- can be update??" do
-#    get :setrevision
-#  end
-#  
+  test "should setrevision to an other one" do
+    assert_difference('MiniWikiPage.find_by_name("HomePage").mini_wiki_revision.revision', -1) do
+      put :setrevision, :setrevision => 2, :wiki_page => mini_wiki_pages(:HomePage).name
+    end
+    
+    assert_not_nil assigns(:wiki_page)
+    assert_not_nil assigns(:wiki_revision)
+    assert_response :redirect
+    assert_redirected_to :controller => "mini_wiki", :action => "show", :wiki_page => "HomePage"
+  end
+  
+  test "should not setrevision to an other one" do
+    assert_no_difference('MiniWikiPage.find_by_name("HomePage").mini_wiki_revision.revision') do
+      put :setrevision, :setrevision => 4, :wiki_page => mini_wiki_pages(:HomePage).name
+    end
+
+    assert_not_nil assigns(:wiki_page)
+    assert_nil assigns(:wiki_revision)
+    assert_response :redirect
+    assert_redirected_to :controller => "mini_wiki", :action => "show", :wiki_page => "HomePage", :revision => 4
+  end
+  
   test "should destroy wiki page" do
     assert_difference('MiniWikiRevision.count', -2) do
       assert_difference('MiniWikiPage.count', -1) do
@@ -139,7 +177,7 @@ class MiniWikiControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :controller => "mini_wiki", :action => "list"
   end
-#  
+  
 #  test "authorized?" do
 #
 #  end

@@ -2,9 +2,6 @@ require 'test_helper.rb'
 
 class MiniWikiControllerTest < ActionController::TestCase
   
-  # TODO: with/wo authentication
-  # TODO: with empty content
-  
   test "should get index with an empty db and gets redirected to new" do
     MiniWikiPage.find(1).destroy
     MiniWikiPage.find(2).destroy
@@ -50,15 +47,34 @@ class MiniWikiControllerTest < ActionController::TestCase
     assert_redirected_to :controller => "mini_wiki", :action => "new", :name => "Not a exsisting page"
   end
   
-  # TODO: test search on title/content/empty db
-  test "should show search results" do
+  test "should show search results only title" do
     post :search, :search => { :query => "Test" }
     assert_response :success
     assert_template :search
   end
   
-  # TODO: empty db
-  test "recently_revised" do
+  test "should show search results only content" do
+    post :search, :search => { :query => "story" }
+    assert_response :success
+    assert_template :search
+  end
+  
+  test "should show search results empty" do
+    post :search, :search => { :query => "nonexistingwordindb" }
+    assert_response :success
+    assert_template :search
+  end
+  
+  test "should show recently_revised" do
+    get :recently_revised
+    assert_response :success
+    assert_template :recently_revised
+  end
+
+  test "should show recently_revised empty" do
+    MiniWikiPage.find(1).destroy
+    MiniWikiPage.find(2).destroy
+    
     get :recently_revised
     assert_response :success
     assert_template :recently_revised

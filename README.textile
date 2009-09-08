@@ -32,7 +32,9 @@ and the @mini_wiki_username@ should return a string. Finaly add to the
 @app/controllers/application_controller.rb@ file @include MiniWikiOverride@ to
 activate the @mini_wiki_override.rb@ module.
 
+
 h2. Usage
+
 The wiki uses @http://redcloth.org/textile@ formatting with one extension to make links
 within the wiki: [[ThisIsALinkToANewPage]].
 

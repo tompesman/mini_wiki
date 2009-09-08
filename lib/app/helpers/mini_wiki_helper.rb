@@ -7,10 +7,10 @@ module MiniWikiHelper
         page = link.scan(/[A-Za-z ]+/).first
         if MiniWikiPage.find_by_name(page)
           linkto = link_to page, {:action => 'show', :wiki_page => page}, :class => 'wiki_link'
-        elsif !@authorized
-          linkto = '<span class="wiki_new_link">'+page+'</span>'
-        else
+        elsif @authorized
           linkto = link_to page, {:action => 'new', :name => page}, :class => 'wiki_new_link'
+        else
+          linkto = '<span class="wiki_new_link">'+page+'</span>'
         end
         contents = contents.gsub(Regexp.new(Regexp.escape(link)),linkto)
       end

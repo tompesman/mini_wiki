@@ -9,7 +9,8 @@ desc 'Test the mini_wiki plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
+  t.test_files = FileList["#{File.dirname(__FILE__)}/test/*.rb"]
+  #t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
 
@@ -26,7 +27,9 @@ begin
   require 'rcov/rcovtask'
   desc 'Output test coverage of plugin.'
   Rcov::RcovTask.new(:coverage) do |t|
-    t.libs << "lib,test"
+    t.libs << "lib"
+    t.libs << "generators"
+    t.libs << "test"
     t.test_files = FileList["#{File.dirname(__FILE__)}/test/*.rb"]
 #    t.pattern    = 'test/**/*_test.rb'
     t.output_dir = "#{File.dirname(__FILE__)}/test/coverage"

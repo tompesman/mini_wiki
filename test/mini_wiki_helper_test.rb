@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+require 'test_helper.rb'
 
 include MiniWikiHelper
 include ActionView::Helpers::UrlHelper
@@ -22,7 +22,15 @@ class MiniWikiHelperTest < ActionController::TestCase
                  to_wiki("bla [[HomePage]] bla")
   end
 
+  test "to wiki with links to non existing page and authorized" do
+    get :index
+    @authorized = true
+    assert_equal "<p><a href=\"/mini_wiki/new?name=HomePageNonExisting\" class=\"wiki_new_link\">HomePageNonExisting</a></p>",
+                 to_wiki("[[HomePageNonExisting]]")
+  end
+
   test "to wiki with links to non existing page" do
+    @authorized = false
     assert_equal "<p><span class=\"wiki_new_link\">HomePageNonExisting</span></p>",
                  to_wiki("[[HomePageNonExisting]]")
   end

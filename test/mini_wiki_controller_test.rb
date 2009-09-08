@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+require 'test_helper.rb'
 
 class MiniWikiControllerTest < ActionController::TestCase
   
@@ -178,12 +178,40 @@ class MiniWikiControllerTest < ActionController::TestCase
     assert_redirected_to :controller => "mini_wiki", :action => "list"
   end
   
-#  test "authorized?" do
-#
-#  end
-#  
-#  test "username" do
-#    
-#  end
+  test "should be authorized" do
+    get :index
+    assert_not_nil assigns(:authorized)
+    assert assigns(:authorized)
+  end
+
+  test "should not be authorized" do
+    @controller.class.instance_eval do
+      define_method :mini_wiki_authorized do
+        false
+      end
+    end
+    
+    get :index
+    assert_not_nil assigns(:authorized)
+    assert !assigns(:authorized)
+  end
+  
+  test "should be an empty username" do
+    get :index
+    assert_not_nil assigns(:username)
+    assert assigns(:username).blank?
+  end
+
+  test "should be an username" do
+    @controller.class.instance_eval do
+      define_method :mini_wiki_username do
+        "Tom Pesman"
+      end
+    end
+    
+    get :index
+    assert_not_nil assigns(:username)
+    assert !assigns(:username).blank?
+  end
 
 end
